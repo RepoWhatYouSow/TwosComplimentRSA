@@ -62,9 +62,9 @@ int encrypt( int val, int e, long long int N);
 
 int decrypt(int val, int d, long long int N);
 
-int buffer(int num, int bin);
+int twosEncrypt(int num, int bin);
 
-int debuffer(int num, int bin);
+int twosDecrypt(int num, int bin);
 
 int main(void)
 {
@@ -115,7 +115,7 @@ int main(void)
 			for (int pos = 1; pos < size ; ++pos)
 			{
 				//shifted message array leaves pos 0 free for the encrypted binary number
-				encrypted[pos] = buffer(encrypt(message[pos-1],e,N),binary[counter]);
+				encrypted[pos] = twosEncrypt(encrypt(message[pos-1],e,N),binary[counter]);
 				printf("%c",encrypted[pos]);
 				counter (counter + 1) % 4;
 
@@ -153,7 +153,7 @@ int main(void)
 
 			for (int pos = 1; pos < size ; ++pos)
 			{
-				decrypted[pos] = decrypt(debuffer(message[pos],binary[counter]),d,N);
+				decrypted[pos] = decrypt(twosDecrypt(message[pos],binary[counter]),d,N);
 				printf("%c",decrypted[pos]);
 				counter = (counter + 1) % 4;
 			}
@@ -337,7 +337,7 @@ int decrypt(int val, int d, long long int N)
 	step2 = (int) step1 % N;
 	return step2;
 }
-int buffer(int num, int bin)
+int twosEncrypt(int num, int bin)
 {
 	num*=-1;
 
@@ -349,7 +349,7 @@ int buffer(int num, int bin)
 
 }
 
-int debuffer(int num, int bin)
+int twosDecrypt(int num, int bin)
 {
 	num *= -1;
 	if(bin == 0)
